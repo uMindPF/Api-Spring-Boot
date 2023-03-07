@@ -14,7 +14,9 @@ public interface IAdminRepository extends JpaRepository<Admin, Integer> {
     @Query("select a from Admin a where a.email like concat('%', ?1, '%')")
     List<Admin> findByEmailContaining(@NonNull String email);
 
-    @Query("select a from Admin a where a.login like concat('%', ?1, '%')")
-    List<Admin> findByLoginContains(String login);
+    @Query("select a from Admin a where a.login like ?1")
+    List<Admin> findByLoginLike(String login);
+
+
 
 }
