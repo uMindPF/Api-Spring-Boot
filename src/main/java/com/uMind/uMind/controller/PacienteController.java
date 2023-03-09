@@ -60,8 +60,8 @@ public class PacienteController {
         existingPaciente.setEmail(paciente.getEmail());
         existingPaciente.setTelefono(paciente.getTelefono());
         existingPaciente.setSexo(paciente.getSexo());
-        existingPaciente.setFechaInicio(paciente.getFechaInicio());
-        existingPaciente.setFechaFin(paciente.getFechaFin());
+        existingPaciente.setFechaInicioDate(paciente.getFechaIncioDate());
+        existingPaciente.setFechaFinDate(paciente.getFechaFinDate());
         existingPaciente.setPoblacion(paciente.getPoblacion());
         existingPaciente.setAntecedentesMedicos(paciente.getAntecedentesMedicos());
         existingPaciente.setDoctor(paciente.getDoctor());

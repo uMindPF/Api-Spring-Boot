@@ -11,6 +11,8 @@ public interface IUsuarioService {
 
     List<Usuario> getUsuarioByLogin(String email);
 
+    List<Usuario> getUsuarioByDni(String dni);
+
     Usuario saveUsuario(Usuario usuario);
 
     Usuario getUsuarioById(Integer id);

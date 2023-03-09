@@ -56,9 +56,11 @@ public class CitaController {
         existingCita.setId(cita.getId());
         existingCita.setDoctor(cita.getDoctor());
         existingCita.setPaciente(cita.getPaciente());
-        existingCita.setFecha(cita.getFecha());
+        existingCita.setFechaDate(cita.getFechaDate());
         existingCita.setEstado(cita.getEstado());
         existingCita.setTipoVista(cita.getTipoVista());
+
+        citaService.saveCita(existingCita);
 
         return "redirect:/citas";
     }

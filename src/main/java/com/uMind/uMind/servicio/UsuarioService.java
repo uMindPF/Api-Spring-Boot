@@ -31,6 +31,11 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
+    public List<Usuario> getUsuarioByDni(String dni) {
+        return usuarioRepository.findByDniLike(dni);
+    }
+
+    @Override
     public Usuario saveUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
