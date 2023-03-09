@@ -1,6 +1,7 @@
 package com.uMind.uMind.security;
 
 import com.uMind.uMind.modelo.Admin;
+import com.uMind.uMind.repositorio.IAdminRepository;
 import com.uMind.uMind.servicio.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -25,15 +27,18 @@ public class SecurityConfig {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private IAdminRepository adminRepository;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
+                        //.requestMatchers("/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .successForwardUrl("/admins")
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
@@ -43,18 +48,23 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        List<UserDetails> users = new ArrayList<>();
-        for (Admin admin : adminService.getAdmins()) {
-            UserDetails user = User.builder()
-                    .username(admin.getLogin())
-                    .password(admin.getPassword())
-                    .passwordEncoder(NoOpPasswordEncoder.getInstance()::encode)
-                    .roles("USER","ADMIN")
-                    .build();
-            users.add(user);
-        }
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                List<Admin> admin = adminRepository.findByLoginLike(username);
 
-        return new InMemoryUserDetailsManager(users);
+                if (admin.size() == 0) {
+                    throw new UsernameNotFoundException("User not found");
+                }
+
+                return User.builder()
+                        .username(admin.get(0).getLogin())
+                        .password(admin.get(0).getPassword())
+                        .passwordEncoder(NoOpPasswordEncoder.getInstance()::encode)
+                        .roles("USER", "ADMIN")
+                        .build();
+            }
+        };
     }
 
     @Bean

@@ -27,8 +27,9 @@ public class AdminService implements IAdminService{
 
     @Override
     public List<Admin> getAdminByLogin(String login) {
-        return adminRepository.findByLoginContains(login);
+        return adminRepository.findByLoginLike(login);
     }
+
 
     @Override
     public Admin saveAdmin(Admin admin) {
