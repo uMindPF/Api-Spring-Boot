@@ -35,6 +35,7 @@ public class UsuarioController {
 
     @PostMapping("/usuarios")
     public String saveUsuario(Usuario usuario) {
+        usuario.setPassword(SecurityClass.hashSHA1(usuario.getPassword()));
         usuarioService.saveUsuario(usuario);
         return "redirect:/usuarios";
     }

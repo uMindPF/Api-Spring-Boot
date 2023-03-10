@@ -11,4 +11,9 @@ import java.util.List;
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query("select u from Usuario u where u.dni like ?1")
     List<Usuario> findByDniLike(String dni);
+
+    @Query("select u from Usuario u where u.login like ?1")
+    List<Usuario> findByLoginLike(String login);
+
+
 }
