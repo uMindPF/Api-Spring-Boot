@@ -23,9 +23,6 @@ public class Paciente {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "dni", nullable = false)
-    private String dni;
-
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
@@ -38,16 +35,16 @@ public class Paciente {
 
     private String sexo;
 
-    @Column(name = "fecha_inicio")
-    private Date fechaInicio;
+    @Column(name = "fecha_nacimiento")
+    private Date fechaNacimiento;
 
-    @Column(name = "fecha_fin")
-    private Date fechaFin;
+    @Column(name = "fecha_alta")
+    private Date fechaAlta;
+
+    @Column(name = "fecha_baja")
+    private Date fechaBaja;
 
     private String poblacion;
-
-    @Column(name = "antecedentes_medicos")
-    private String antecedentesMedicos;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
@@ -57,47 +54,70 @@ public class Paciente {
     }
 
     public void setFechaInicioDate(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
+        this.fechaAlta = fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaAlta(String fechaAlta) {
         try {
-            this.fechaInicio = new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicio);
+            this.fechaAlta = new SimpleDateFormat("yyyy-MM-dd").parse(fechaAlta);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
     public Date getFechaIncioDate() {
-        return fechaInicio;
+        return fechaAlta;
     }
 
-    public String getFechaInicio() {
-        if (fechaInicio == null) {
+    public String getFechaAlta() {
+        if (fechaAlta == null) {
             return "";
         }
-        return new SimpleDateFormat("yyyy-MM-dd").format(fechaInicio);
+        return new SimpleDateFormat("yyyy-MM-dd").format(fechaAlta);
     }
 
     public void setFechaFinDate(Date fechaFin) {
-        this.fechaFin = fechaFin;
+        this.fechaBaja = fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaBaja(String fechaBaja) {
         try{
-            this.fechaFin = new SimpleDateFormat("yyyy-MM-dd").parse(fechaFin);
+            this.fechaBaja = new SimpleDateFormat("yyyy-MM-dd").parse(fechaBaja);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     public Date getFechaFinDate() {
-        return fechaFin;
+        return fechaBaja;
     }
 
-    public String getFechaFin() {
-        if (fechaFin == null) {
+    public String getFechaBaja() {
+        if (fechaBaja == null) {
             return "";
         }
-        return new SimpleDateFormat("yyyy-MM-dd").format(fechaFin);
+        return new SimpleDateFormat("yyyy-MM-dd").format(fechaBaja);
+    }
+
+    public void setFechaNacimientoDate(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        try{
+            this.fechaNacimiento = new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Date getFechaNacimientoDate() {
+        return fechaNacimiento;
+    }
+
+    public String getFechaNacimiento() {
+        if (fechaNacimiento == null) {
+            return "";
+        }
+        return new SimpleDateFormat("yyyy-MM-dd").format(fechaNacimiento);
     }
 }

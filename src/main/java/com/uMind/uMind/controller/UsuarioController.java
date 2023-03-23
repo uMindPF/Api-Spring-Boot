@@ -1,7 +1,6 @@
 package com.uMind.uMind.controller;
 
 import com.uMind.uMind.modelo.Usuario;
-import com.uMind.uMind.security.SecurityClass;
 import com.uMind.uMind.servicio.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

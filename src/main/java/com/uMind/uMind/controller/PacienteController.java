@@ -54,7 +54,6 @@ public class PacienteController {
         Paciente existingPaciente = pacienteService.getPacienteById(id);
 
         existingPaciente.setId(paciente.getId());
-        existingPaciente.setDni(paciente.getDni());
         existingPaciente.setNombre(paciente.getNombre());
         existingPaciente.setApellidos(paciente.getApellidos());
         existingPaciente.setEmail(paciente.getEmail());
@@ -63,8 +62,9 @@ public class PacienteController {
         existingPaciente.setFechaInicioDate(paciente.getFechaIncioDate());
         existingPaciente.setFechaFinDate(paciente.getFechaFinDate());
         existingPaciente.setPoblacion(paciente.getPoblacion());
-        existingPaciente.setAntecedentesMedicos(paciente.getAntecedentesMedicos());
         existingPaciente.setDoctor(paciente.getDoctor());
+        existingPaciente.setFechaNacimientoDate(paciente.getFechaNacimientoDate());
+
 
         pacienteService.savePaciente(existingPaciente);
 

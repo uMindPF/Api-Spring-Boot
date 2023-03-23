@@ -21,7 +21,7 @@ public class PacienteService implements IPacienteService{
     }
 
     @Override
-    public List<Paciente> getPacienteByNombre(String nombre) {
+    public List<Paciente> getPacienteByDoctor(Integer doctorId) {
         return null;
     }
 

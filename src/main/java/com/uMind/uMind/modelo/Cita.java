@@ -25,7 +25,11 @@ public class Cita {
     @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 
-    private Date fecha;
+    private Date dia;
+
+    private Date hora;
+
+    private Double duracion;
 
     private String estado;
 
@@ -35,25 +39,47 @@ public class Cita {
     public Cita() {
     }
 
-    public void setFecha(String fecha) {
+    public void setHora (String hora) {
         try {
-            this.fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+            this.hora = new SimpleDateFormat("HH:mm").parse(hora);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setHoraDate (Date hora) {
+        this.hora = hora;
+    }
+
+    public String getHora () {
+        if (hora == null) return null;
+
+        return new SimpleDateFormat("HH:mm").format(hora);
+    }
+
+    public Date getHoraDate () {
+        return hora;
+    }
+
+    public void setDia(String dia) {
+        try {
+            this.dia = new SimpleDateFormat("yyyy-MM-dd").parse(dia);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void setFechaDate(Date fecha) {
-        this.fecha = fecha;
+        this.dia = fecha;
     }
 
-    public String getFecha() {
-        if (fecha == null) return null;
+    public String getDia() {
+        if (dia == null) return null;
 
-        return new SimpleDateFormat("yyyy-MM-dd").format(fecha);
+        return new SimpleDateFormat("yyyy-MM-dd").format(dia);
     }
 
     public Date getFechaDate() {
-        return fecha;
+        return dia;
     }
 }

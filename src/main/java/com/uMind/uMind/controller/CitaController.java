@@ -59,6 +59,9 @@ public class CitaController {
         existingCita.setFechaDate(cita.getFechaDate());
         existingCita.setEstado(cita.getEstado());
         existingCita.setTipoVista(cita.getTipoVista());
+        existingCita.setHoraDate(cita.getHoraDate());
+        existingCita.setDuracion(cita.getDuracion());
+
 
         citaService.saveCita(existingCita);
 

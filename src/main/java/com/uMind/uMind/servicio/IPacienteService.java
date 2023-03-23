@@ -7,7 +7,7 @@ public interface IPacienteService {
 
     List<Paciente> getPacientes();
 
-    List<Paciente> getPacienteByNombre(String nombre);
+    List<Paciente> getPacienteByDoctor(Integer doctorId);
 
     Paciente savePaciente(Paciente paciente);
 

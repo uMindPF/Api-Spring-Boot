@@ -1,9 +1,7 @@
 package com.uMind.uMind.modelo;
 
-import com.uMind.uMind.security.SecurityClass;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.context.annotation.Configuration;
 
 @Entity
 @Table(name = "usuarios")
