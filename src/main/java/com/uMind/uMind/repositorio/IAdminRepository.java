@@ -17,6 +17,4 @@ public interface IAdminRepository extends JpaRepository<Admin, Integer> {
     @Query("select a from Admin a where a.login like ?1")
     List<Admin> findByLoginLike(String login);
 
-
-
 }
