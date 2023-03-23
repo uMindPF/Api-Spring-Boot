@@ -1,9 +1,8 @@
 package com.uMind.uMind.modelo;
 
-import com.uMind.uMind.security.SecurityClass;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name = "usuarios")
@@ -42,6 +41,6 @@ public class Usuario {
         this.email = email;
         this.telefono = telefono;
         this.login = login;
-        this.password = SecurityClass.hashSHA1(password);
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
 }

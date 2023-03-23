@@ -1,10 +1,10 @@
 package com.uMind.uMind.controller;
 
 import com.uMind.uMind.modelo.Admin;
-import com.uMind.uMind.security.SecurityClass;
 import com.uMind.uMind.servicio.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +36,7 @@ public class AdminController {
 
     @PostMapping("/admins")
     public String saveAdmin(@ModelAttribute("admin") Admin admin) {
-        admin.setPassword(SecurityClass.hashSHA1(admin.getPassword()));
+        admin.setPassword(new BCryptPasswordEncoder().encode(admin.getPassword()));
         adminService.saveAdmin(admin);
         return "redirect:/admins";
     }
@@ -81,7 +81,7 @@ public class AdminController {
         Admin existentAdmin = adminService.getAdminById(id);
 
         existentAdmin.setId(id);
-        existentAdmin.setPassword(SecurityClass.hashSha1Text(admin.getPassword()));
+        existentAdmin.setPassword(new BCryptPasswordEncoder().encode(admin.getPassword()));
 
         adminService.updateAdmin(existentAdmin);
 

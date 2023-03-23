@@ -1,10 +1,10 @@
 package com.uMind.uMind.controller;
 
 import com.uMind.uMind.modelo.Usuario;
-import com.uMind.uMind.security.SecurityClass;
 import com.uMind.uMind.servicio.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,7 +82,7 @@ public class UsuarioController {
     {
         Usuario existingUsuario = usuarioService.getUsuarioById(id);
 
-        existingUsuario.setPassword(SecurityClass.hashSHA1(usuario.getPassword()));
+        existingUsuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
 
         usuarioService.saveUsuario(existingUsuario);
 
