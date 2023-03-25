@@ -6,6 +6,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -28,7 +29,7 @@ public class Cita {
 
     private Date dia;
 
-    private Date hora;
+    private LocalTime hora;
 
     private double duracion;
 
@@ -64,24 +65,24 @@ public class Cita {
 
     public void setHora(String hora) {
         try {
-            this.hora = new SimpleDateFormat("HH:mm").parse(hora);
-        } catch (ParseException e) {
+            this.hora = LocalTime.parse(hora);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void setHoraDate(Date hora) {
-        this.hora = hora;
+        this.hora = hora.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalTime();
     }
 
     public Date getHoraDate() {
-        return hora;
+        return java.sql.Time.valueOf(hora);
     }
 
     public String getHora() {
         if (hora == null) return null;
 
-        return new SimpleDateFormat("HH:mm").format(hora);
+        return hora.toString();
     }
 
 

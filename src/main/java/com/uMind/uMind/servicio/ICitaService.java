@@ -8,9 +8,9 @@ public interface ICitaService {
 
     List<Cita> getCitas();
 
-    List<Cita> getCitaByPaciente(String paciente);
+    List<Cita> getCitaByPaciente(Integer paciente);
 
-    List<Cita> getCitaByDoctor(String doctor);
+    List<Cita> getCitaByDoctor(Integer doctor);
 
     Cita saveCita(Cita cita);
 

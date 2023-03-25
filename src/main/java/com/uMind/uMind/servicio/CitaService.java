@@ -21,13 +21,13 @@ public class CitaService implements ICitaService {
     }
 
     @Override
-    public List<Cita> getCitaByPaciente(String paciente) {
+    public List<Cita> getCitaByPaciente(Integer paciente) {
         return null;
     }
 
     @Override
-    public List<Cita> getCitaByDoctor(String doctor) {
-        return null;
+    public List<Cita> getCitaByDoctor(Integer doctor) {
+        return citaRepostory.findByDoctor_Id(doctor);
     }
 
     @Override

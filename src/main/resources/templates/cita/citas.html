@@ -58,6 +58,8 @@
             <th>Paciente ID</th>
             <th>Paciente Nombre</th>
             <th>Fecha</th>
+            <th>Hora</th>
+            <th>Duracion</th>
             <th>Estado</th>
             <th>Tipo Vista</th>
             <th>Actions</th>
@@ -70,7 +72,9 @@
             <td th:text="${cita.doctor.nombre}"></td>
             <td th:text="${cita.paciente.id}"></td>
             <td th:text="${cita.paciente.nombre}"></td>
-            <td th:text="${cita.fecha}"></td>
+            <td th:text="${cita.dia}"></td>
+            <td th:text="${cita.hora}"></td>
+            <td th:text="${cita.duracion}"></td>
             <td th:text="${cita.estado}"></td>
             <td th:text="${cita.tipoVista}"></td>
             <td>
