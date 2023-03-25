@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,5 +37,16 @@ public class CitaConsultaController {
     @GetMapping("/consultas/citas/doctor/{id}")
     public List<Cita> getCitaByDoctor(@PathVariable Integer id) {
         return citaService.getCitaByDoctor(id);
+    }
+
+    @GetMapping("/consultas/citas/date/{dateS}")
+    public List<Cita> getCitaByDate(@PathVariable String dateS) {
+        try{
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = formatter.parse(dateS);
+            return citaService.getCitaByDate(date);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
