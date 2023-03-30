@@ -1,19 +1,71 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <head>
   <meta charset="ISO-8859-1">
   <title>Management System</title>
   <link rel="stylesheet"
-
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
 </head>
 <body>
+<style>
+  body {
+    background-color: rgba(127, 255, 197, 0.29);
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  h1 {
+    color: #007bff;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  h3 {
+    margin-top: 10px;
+    text-align: center;
+  }
+  nav {
+    background: linear-gradient(to right, rgb(0, 34, 204), rgb(51, 204, 153));
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    display: inline-block;
+  }
+
+  nav a {
+    color: white;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  }
+
+  nav a:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  form {
+    max-width: 400px;
+    margin: 10px auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  }
+</style>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
-  <a class="navbar-brand" href="/">Management System</a>
+  <a class="navbar-brand" href="/">Inicio</a>
   <!-- Toggler/Collapse Button -->
   <button class="navbar-toggler" type="button" datatoggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -24,28 +76,28 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link"
-           th:href="@{/admins}">Admin Management</a>
+           th:href="@{/admins}">Gestionar Administradores</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"
-           th:href="@{/usuarios}">Employee Management</a>
+           th:href="@{/usuarios}">Gestionar Usuarios</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"
-           th:href="@{/pacientes}">Paciente Management</a>
+           th:href="@{/pacientes}">Gestionar Pacientes</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"
-           th:href="@{/citas}">Cita Management</a>
+           th:href="@{/citas}">Gestionar Citas</a>
       </li>
     </ul>
   </div>
 </nav>
 <div class="container">
-  <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
-  <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-  </form>
+  <h3><form th:action="@{/logout}" method="post">
+    <h1 th:inline="text">¡Bienvenido/a <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+    <input type="submit" value="Cerrar sesión"/>
+  </form></h3>
 </div>
 </body>
 </html>
