@@ -3,8 +3,10 @@ package com.uMind.uMind.modelo;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -25,7 +27,11 @@ public class Cita {
     @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 
-    private Date fecha;
+    private Date dia;
+
+    private LocalTime hora;
+
+    private double duracion;
 
     private String estado;
 
@@ -35,25 +41,49 @@ public class Cita {
     public Cita() {
     }
 
-    public void setFecha(String fecha) {
+    public void setDia(String dia) {
         try {
-            this.fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+            this.dia = new SimpleDateFormat("yyyy-MM-dd").parse(dia);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void setFechaDate(Date fecha) {
-        this.fecha = fecha;
+        this.dia = fecha;
     }
 
-    public String getFecha() {
-        if (fecha == null) return null;
+    public String getDia() {
+        if (dia == null) return null;
 
-        return new SimpleDateFormat("yyyy-MM-dd").format(fecha);
+        return new SimpleDateFormat("yyyy-MM-dd").format(dia);
     }
 
     public Date getFechaDate() {
-        return fecha;
+        return dia;
     }
+
+    public void setHora(String hora) {
+        try {
+            this.hora = LocalTime.parse(hora);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setHoraDate(Date hora) {
+        this.hora = hora.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalTime();
+    }
+
+    public Date getHoraDate() {
+        return java.sql.Time.valueOf(hora);
+    }
+
+    public String getHora() {
+        if (hora == null) return null;
+
+        return hora.toString();
+    }
+
+
 }

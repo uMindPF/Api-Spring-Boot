@@ -22,7 +22,7 @@ public class PacienteService implements IPacienteService{
 
     @Override
     public List<Paciente> getPacienteByNombre(String nombre) {
-        return null;
+        return pacienteRepository.findByNombreContainsOrApellidosContains(nombre, nombre);
     }
 
     @Override

@@ -2,15 +2,18 @@ package com.uMind.uMind.servicio;
 
 import com.uMind.uMind.modelo.Cita;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ICitaService {
 
     List<Cita> getCitas();
 
-    List<Cita> getCitaByPaciente(String paciente);
+    List<Cita> getCitaByPaciente(Integer paciente);
 
-    List<Cita> getCitaByDoctor(String doctor);
+    List<Cita> getCitaByDoctor(Integer doctor);
+
+    List<Cita> getCitaByDate(Date date);
 
     Cita saveCita(Cita cita);
 

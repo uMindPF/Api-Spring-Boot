@@ -147,7 +147,6 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>DNI</th>
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Email</th>
@@ -164,16 +163,14 @@
         <tbody>
         <tr th:each="paciente: ${paciente}">
             <td th:text="${paciente.id}"></td>
-            <td th:text="${paciente.dni}"></td>
             <td th:text="${paciente.nombre}"></td>
             <td th:text="${paciente.apellidos}"></td>
             <td th:text="${paciente.email}"></td>
             <td th:text="${paciente.telefono}"></td>
             <td th:text="${paciente.sexo}"></td>
-            <td th:text="${paciente.fechaInicio}"></td>
-            <td th:text="${paciente.fechaFin}"></td>
+            <td th:text="${paciente.fechaAlta}"></td>
+            <td th:text="${paciente.fechaBaja}"></td>
             <td th:text="${paciente.poblacion}"></td>
-            <td th:text="${paciente.antecedentesMedicos}"></td>
             <td th:text="${paciente.doctor.id}"></td>
             <td>
                 <a th:href="@{/pacientes/edit/{id}(id=${paciente.id})}"

@@ -4,6 +4,7 @@ import com.uMind.uMind.modelo.Cita;
 import com.uMind.uMind.repositorio.ICitaRepostory;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,13 +22,18 @@ public class CitaService implements ICitaService {
     }
 
     @Override
-    public List<Cita> getCitaByPaciente(String paciente) {
+    public List<Cita> getCitaByPaciente(Integer paciente) {
         return null;
     }
 
     @Override
-    public List<Cita> getCitaByDoctor(String doctor) {
-        return null;
+    public List<Cita> getCitaByDoctor(Integer doctor) {
+        return citaRepostory.findByDoctor_Id(doctor);
+    }
+
+    @Override
+    public List<Cita> getCitaByDate(Date date) {
+        return citaRepostory.findByDia(date);
     }
 
     @Override
