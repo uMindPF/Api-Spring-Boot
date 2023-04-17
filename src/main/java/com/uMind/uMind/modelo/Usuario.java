@@ -1,5 +1,7 @@
 package com.uMind.uMind.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,8 +28,10 @@ public class Usuario {
 
     private String telefono;
 
+    @JsonIgnore
     private String login;
 
+    @JsonIgnore 
     private String password;
 
     public Usuario() {

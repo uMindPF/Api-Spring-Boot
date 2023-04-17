@@ -1,5 +1,6 @@
 package com.uMind.uMind.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -35,7 +36,7 @@ public class Paciente {
     @Column(name = "fecha_alta")
     private Date fechaAlta;
 
-    @Column(name = "fecha_baja")
+    @Column(name = "fecha_baja", nullable = true)
     private Date fechaBaja;
 
     private String poblacion;
@@ -47,6 +48,7 @@ public class Paciente {
     public Paciente() {
     }
 
+    @JsonIgnore
     public void setFechaInicioDate(Date fechaInicio) {
         this.fechaAlta = fechaInicio;
     }
@@ -58,6 +60,8 @@ public class Paciente {
             e.printStackTrace();
         }
     }
+
+    @JsonIgnore
     public Date getFechaIncioDate() {
         return fechaAlta;
     }
@@ -69,6 +73,7 @@ public class Paciente {
         return new SimpleDateFormat("yyyy-MM-dd").format(fechaAlta);
     }
 
+    @JsonIgnore
     public void setFechaFinDate(Date fechaFin) {
         this.fechaBaja = fechaFin;
     }
@@ -81,6 +86,7 @@ public class Paciente {
         }
     }
 
+    @JsonIgnore
     public Date getFechaFinDate() {
         return fechaBaja;
     }
@@ -92,6 +98,7 @@ public class Paciente {
         return new SimpleDateFormat("yyyy-MM-dd").format(fechaBaja);
     }
 
+    @JsonIgnore
     public void setFechaNacimientoDate(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -104,6 +111,7 @@ public class Paciente {
         }
     }
 
+    @JsonIgnore
     public Date getFechaNacimientoDate() {
         return fechaNacimiento;
     }
