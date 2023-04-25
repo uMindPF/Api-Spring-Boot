@@ -1,12 +1,13 @@
 package com.uMind.uMind.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uMind.uMind.modelo.Cita;
+import com.uMind.uMind.modelo.Paciente;
 import com.uMind.uMind.servicio.CitaService;
 import lombok.AllArgsConstructor;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +16,9 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class CitaConsultaController {
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Autowired
     private CitaService citaService;
@@ -48,5 +52,36 @@ public class CitaConsultaController {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private static class Data{
+        public Integer id;
+        public String date;
+    }
+
+    @PostMapping("/consultas/citas/dateDoctor/")
+    public List<Cita> getCitaByDateDoctor(@RequestBody String request) {
+        try {
+            Data data = objectMapper.readValue(request, Data.class);
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data.date);
+
+            return citaService.getCitaByDateAndDoctor(date, data.id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @PostMapping("/consultas/citas/save")
+    public void saveCita(@RequestBody String request) {
+        try {
+            Cita cita = objectMapper.readValue(request, Cita.class);
+            System.out.println("Cita: " + cita);
+
+            citaService.saveCita(cita);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

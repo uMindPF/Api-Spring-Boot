@@ -15,4 +15,9 @@ public interface ICitaRepostory extends JpaRepository<Cita, Integer> {
 
     @Query("select c from Cita c where c.dia = ?1")
     List<Cita> findByDia(Date dia);
+
+    @Query("select c from Cita c where c.doctor.id = ?1 and c.dia = ?2")
+    List<Cita> findByDoctor_IdAndDia(int id, Date dia);
+
+
 }

@@ -36,6 +36,10 @@ public class CitaService implements ICitaService {
         return citaRepostory.findByDia(date);
     }
 
+    public List<Cita> getCitaByDateAndDoctor(Date date, Integer doctor) {
+        return citaRepostory.findByDoctor_IdAndDia(doctor, date);
+    }
+
     @Override
     public Cita saveCita(Cita cita) {
         return citaRepostory.save(cita);

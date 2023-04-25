@@ -62,7 +62,7 @@ public class CitaController {
         existingCita.setHora(cita.getHora());
         existingCita.setDuracion(cita.getDuracion());
 
-        citaService.saveCita(existingCita);
+        citaService.saveCita(existingCita); 
 
         return "redirect:/citas";
     }

@@ -15,6 +15,8 @@ public interface ICitaService {
 
     List<Cita> getCitaByDate(Date date);
 
+    List<Cita> getCitaByDateAndDoctor(Date date, Integer doctor);
+
     Cita saveCita(Cita cita);
 
     Cita getCitaById(Integer id);
