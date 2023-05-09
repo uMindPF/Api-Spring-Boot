@@ -3,6 +3,7 @@ package com.uMind.uMind.controller;
 import com.uMind.uMind.modelo.HistoriaClinica;
 import com.uMind.uMind.modelo.Paciente;
 import com.uMind.uMind.servicio.HistoriaClinicaService;
+import com.uMind.uMind.servicio.PacienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 public class HistoriaClinicaController {
@@ -19,28 +22,46 @@ public class HistoriaClinicaController {
     @Autowired
     private HistoriaClinicaService historiaClinicaService;
 
-    @GetMapping("/historias")
-    public String listHistorias(Model model) {
-        model.addAttribute("historia", historiaClinicaService.getHistoriasClinicas());
-        return "historia/historias";
+    @Autowired
+    private PacienteService pacienteService;
+
+    static class ModelHistorial {
+        public Integer idPaciente;
+        public List<HistoriaClinica> historial;
     }
 
-    @GetMapping("/historias/new")
-    public String createHistoriaForm(Model model) {
-        HistoriaClinica historiaClinica = new HistoriaClinica();
 
+    @GetMapping("/historial/{id}")
+    public String listHistoriasPaciente(@PathVariable Integer id, Model model) {
+
+        ModelHistorial modelHistorial = new ModelHistorial();
+        modelHistorial.idPaciente = id;
+        modelHistorial.historial = historiaClinicaService.getHistoriaClinicaByPaciente(id);
+
+        model.addAttribute("model", modelHistorial);
+        return "historia/historial";
+    }
+
+    @GetMapping("/historial/{id}/new")
+    public String createHistoriaForm(@PathVariable Integer id, Model model) {
+
+        HistoriaClinica historiaClinica = new HistoriaClinica();
+        Paciente paciente = pacienteService.getPacienteById(id);
+        historiaClinica.setPaciente(paciente);
+        historiaClinica.setFecha(String.valueOf(new java.sql.Date(System.currentTimeMillis())));
         model.addAttribute("historiaClinica", historiaClinica);
 
         return "historia/create_historia";
     }
 
-    @PostMapping("/historias")
+    @PostMapping("/historia")
     public String saveHistoria(@ModelAttribute("historiaClinica") HistoriaClinica historiaClinica) {
         historiaClinicaService.saveHistoriaClinica(historiaClinica);
-        return "redirect:/historias";
+        int idPaciente = historiaClinica.getPaciente().getId();
+        return "redirect:/historial/" + idPaciente;
     }
 
-    @GetMapping("/historias/edit/{id}")
+    @GetMapping("/historial/edit/{id}")
     public String editHistoriaForm(@PathVariable Integer id, Model model)
     {
         HistoriaClinica historiaClinica = historiaClinicaService.getHistoriaClinicaById(id);
@@ -50,7 +71,7 @@ public class HistoriaClinicaController {
         return "historia/edit_historia";
     }
 
-    @PostMapping("/historias/{id}")
+    @PostMapping("/historial/update/{id}")
     public String updateHistoria(@PathVariable Integer id, @ModelAttribute("historiaClinica") HistoriaClinica historiaClinica, Model model) {
         HistoriaClinica existingHistoriaClinica = historiaClinicaService.getHistoriaClinicaById(id);
 
@@ -62,13 +83,17 @@ public class HistoriaClinicaController {
 
         historiaClinicaService.saveHistoriaClinica(existingHistoriaClinica);
 
-        return "redirect:/historias";
+        int idPaciente = historiaClinica.getPaciente().getId();
+
+        return "redirect:/historial/" + idPaciente;
     }
 
-    @GetMapping("/historias/delete/{id}")
+    @GetMapping("/historial/delete/{id}")
     public String deleteHistoria(@PathVariable Integer id) {
+        HistoriaClinica historiaClinica = historiaClinicaService.getHistoriaClinicaById(id);
         historiaClinicaService.deleteHistoriaClinicaById(id);
-        return "redirect:/historias";
+        int idPaciente = historiaClinica.getPaciente().getId();
+        return "redirect:/historial/" + idPaciente;
     }
 
 }

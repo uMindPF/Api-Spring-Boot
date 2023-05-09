@@ -156,6 +156,7 @@
             <th>Fecha de Fin</th>
             <th>Poblacion</th>
             <th>Doctor</th>
+            <th>Historial</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -171,6 +172,10 @@
             <td th:text="${paciente.fechaBaja}"></td>
             <td th:text="${paciente.poblacion}"></td>
             <td th:text="${paciente.doctor.id}"></td>
+            <td>
+                <a th:href="@{/historial/{id}(id=${paciente.id})}"
+                   class="btn btn-primary">Historial</a>
+            </td>
             <td>
                 <a th:href="@{/pacientes/edit/{id}(id=${paciente.id})}"
                    class="btn btn-primary">Update</a>

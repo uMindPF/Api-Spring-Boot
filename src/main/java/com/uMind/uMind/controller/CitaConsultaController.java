@@ -59,13 +59,14 @@ public class CitaConsultaController {
         public String date;
     }
 
-    @PostMapping("/consultas/citas/dateDoctor/")
-    public List<Cita> getCitaByDateDoctor(@RequestBody String request) {
+    @GetMapping("/consultas/citas/{id}/{dateS}")
+    public List<Cita> getCitaByDateDoctor(@PathVariable String dateS, @PathVariable Integer id) {
         try {
-            Data data = objectMapper.readValue(request, Data.class);
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data.date);
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateS);
 
-            return citaService.getCitaByDateAndDoctor(date, data.id);
+            System.out.println("Data: " + id + " " + dateS);
+
+            return citaService.getCitaByDateAndDoctor(date, id);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
