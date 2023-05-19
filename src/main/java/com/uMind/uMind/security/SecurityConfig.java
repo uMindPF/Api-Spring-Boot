@@ -58,9 +58,10 @@ public class SecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll)
-                 */
+                )*/
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/"))
                 .build();
 
     }
@@ -77,6 +78,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("pass: " + new BCryptPasswordEncoder().encode("a"));
     }
 
 }
