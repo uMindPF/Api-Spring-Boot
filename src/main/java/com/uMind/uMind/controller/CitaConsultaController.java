@@ -85,4 +85,9 @@ public class CitaConsultaController {
         }
 
     }
+
+    @GetMapping("/consultas/citas/delete/{id}")
+    public void deleteCita(@PathVariable Integer id) {
+        citaService.deleteCitaById(id);
+    }
 }

@@ -54,8 +54,7 @@ public class SecurityConfig {
                 .and()
                 .addFilter(jwtAuthenticationFilter)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
-                /*
-                .formLogin((form) -> form
+                /*.formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
                 )*/

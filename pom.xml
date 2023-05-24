@@ -9,14 +9,21 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.uMind</groupId>
-	<artifactId>uMind</artifactId>
+	<artifactId>umind</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>uMind</name>
+	<packaging>war</packaging>
+	<name>umind</name>
 	<description>Spring boot api for uMind Project </description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
+		<start-class>com.uMind.uMind.UMindApplication</start-class>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -71,11 +78,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
 			<version>0.11.5</version>
@@ -104,7 +106,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>${artifactId}</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -116,6 +118,13 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 		</plugins>
